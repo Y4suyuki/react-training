@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-class Square extends React.Component<{value: number}, {}> {
+type SquareProps = {value: number};
+class Square extends React.Component<SquareProps, {}> {
+  state = { value: null }
+  constructor(props: SquareProps) {
+    super(props);
+    this.state = {
+      value: null,
+    }
+  }
   render() {
     return (
-      <button className="square">
-        { this.props.value }
+      <button className="square" onClick={() => {
+        this.setState({value: "X" });
+      }}>
+        { this.state.value }
       </button>
     );
   }
