@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-class Square extends React.Component {
+class Square extends React.Component<{value: number}, {}> {
   render() {
     return (
       <button className="square">
-        {/* TODO */}
+        { this.props.value }
       </button>
     );
   }
 }
 
 class Board extends React.Component {
-  renderSquare(_: number) {
-    return <Square />;
+  renderSquare(i: number) {
+    return <Square value={i} />;
   }
 
   render() {
