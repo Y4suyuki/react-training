@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-type SquareProps = {value: number};
+type Mark = 'X' | 'O' | null
+type SquareProps = {value: Mark, onClick: () => void};
+type BoardState = { squares: (Mark)[]}
+
 class Square extends React.Component<SquareProps, {}> {
   state = { value: null }
   constructor(props: SquareProps) {
@@ -14,18 +17,33 @@ class Square extends React.Component<SquareProps, {}> {
   }
   render() {
     return (
-      <button className="square" onClick={() => {
-        this.setState({value: "X" });
-      }}>
-        { this.state.value }
+      <button className="square" onClick={this.props.onClick}>
+        { this.props.value }
       </button>
     );
   }
 }
 
-class Board extends React.Component {
+class Board extends React.Component<{}, BoardState> {
+  state: BoardState = { squares: [null, null, null,
+                                  null, null, null,
+                                  null, null, null,]}
+
+  constructor(props: {}) {
+    super(props)
+    this.state.squares = [null, null, null,
+                          null, null, null,
+                          null, null, null,]
+  }
+
+  handleClick(i: number)  {
+    const squares = this.state.squares.slice();
+    squares[i] = 'X';
+    this.setState({ squares: squares })
+  }
+
   renderSquare(i: number) {
-    return <Square value={i} />;
+    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
   }
 
   render() {
