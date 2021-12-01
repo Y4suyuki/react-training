@@ -7,21 +7,12 @@ type Mark = 'X' | 'O' | null
 type SquareProps = {value: Mark, onClick: () => void};
 type BoardState = { squares: (Mark)[]}
 
-class Square extends React.Component<SquareProps, {}> {
-  state = { value: null }
-  constructor(props: SquareProps) {
-    super(props);
-    this.state = {
-      value: null,
-    }
-  }
-  render() {
-    return (
-      <button className="square" onClick={this.props.onClick}>
-        { this.props.value }
-      </button>
-    );
-  }
+function Square(props: SquareProps) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      { props.value }
+    </button>
+  )
 }
 
 class Board extends React.Component<{}, BoardState> {
