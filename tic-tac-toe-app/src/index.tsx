@@ -3,22 +3,33 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-type SquareType = {
-  value: number
+type SquareProps = {}
+type SquereState = {
+  value: string | null
 }
-class Square extends React.Component<SquareType> {
+class Square extends React.Component<SquareProps, SquereState> {
+  constructor(props: SquareProps) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+
   render() {
     return (
-      <button className="square">
-        {this.props.value}
+      <button
+        className="square"
+        onClick={() => this.setState({value: 'X'})}
+      >
+        {this.state.value}
       </button>
     );
   }
 }
 
 class Board extends React.Component {
-  renderSquare(i: number) {
-    return <Square value={i}/>;
+  renderSquare() {
+    return <Square/>;
   }
 
   render() {
@@ -28,19 +39,19 @@ class Board extends React.Component {
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+          {this.renderSquare()}
+          {this.renderSquare()}
+          {this.renderSquare()}
         </div>
         <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {this.renderSquare()}
+          {this.renderSquare()}
+          {this.renderSquare()}
         </div>
         <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+          {this.renderSquare()}
+          {this.renderSquare()}
+          {this.renderSquare()}
         </div>
       </div>
     );
