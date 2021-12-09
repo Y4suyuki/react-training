@@ -8,3 +8,19 @@ jobs:
       - name: List files in the repo
         run: |
           ls ${{ github.workspace }}
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: install dependencies
+        working-directory: ./tic-tac-toe-app
+        run: npm i
+      - name: install playwright dependencies
+        working-directory: ./tic-tac-toe-app
+        run: npx playwright install
+      - name: run e2e tests
+        working-directory: ./tic-tac-toe-app
+        run: npm run playwright

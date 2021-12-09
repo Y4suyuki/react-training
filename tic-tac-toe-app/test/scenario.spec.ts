@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test"
 
 test.describe('scenario', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000');
+  test.beforeEach(async ({ page, baseURL }) => {
+    await page.goto(baseURL);
   })
   test.describe('initial state', () => {
     test('show basic info', async ({ page }) => {
