@@ -1,0 +1,10 @@
+name: Test
+on: [push]
+jobs:
+  Explore-Github-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello from ubuntu"
+      - name: List files in the repo
+        run: |
+          ls ${{ github.workspace }}
