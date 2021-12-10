@@ -2,12 +2,12 @@ import React from 'react';
 import { SquareValue } from '../types/SquareValue'
 import { Square } from '../components/Square'
 
-type BordProps = {
+type BoardProps = {
   squares: SquareValue[];
   onClick: (i :number) => void;
 };
 
-export class Board extends React.Component<BordProps> {
+export class Board extends React.Component<BoardProps> {
   renderSquare(i: number) {
     return (
       <Square
