@@ -11,7 +11,7 @@ export const useGame = () => {
   const [stepNumber, setStepNumber] = useState<number>(0);
   const [xIsNext   , setXIsNext]    = useState<boolean>(true);
 
-  const handleClick = (i: number): void => {
+  const handleNextMove = (i: number): void => {
     const historySlice = history.slice(0, stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -19,6 +19,7 @@ export const useGame = () => {
       return;
     }
     squares[i] = xIsNext ? 'X' : 'O';
+
     setHistory(historySlice.concat({squares: squares}));
     setStepNumber(history.length);
     setXIsNext(!xIsNext);
@@ -33,7 +34,7 @@ export const useGame = () => {
     history: history,
     stepNumber: stepNumber,
     xIsNext: xIsNext,
-    handleClick: handleClick,
+    handleNextMove: handleNextMove,
     jumpTo: jumpTo
   };
 };

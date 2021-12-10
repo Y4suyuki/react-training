@@ -3,7 +3,7 @@ import { useGame } from '../hooks/useGame'
 import { calculateWinner } from '../lib/calculateWinner'
 
 export const Game: React.FC = () => {
-  const { history, stepNumber, xIsNext, handleClick, jumpTo } = useGame();
+  const { history, stepNumber, xIsNext, handleNextMove, jumpTo } = useGame();
 
   const current = history[stepNumber];
   const winner = calculateWinner(current.squares);
@@ -28,7 +28,7 @@ export const Game: React.FC = () => {
       <div className="game-board">
         <Board
           squares={current.squares}
-          onClick={(i) => handleClick(i)}
+          onClick={(i) => handleNextMove(i)}
         />
       </div>
       <div className="game-info">
