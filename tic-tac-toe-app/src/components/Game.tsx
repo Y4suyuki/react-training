@@ -1,9 +1,10 @@
 import { Board } from '../components/Board'
 import { History } from '../components/History'
+import { First }  from '../components/First'
 import { useGame } from '../hooks/useGame'
 
 export const Game: React.FC = () => {
-  const { xIsNext, moveHistory, currentMove, winner, handleNextMove, jumpTo } = useGame();
+  const { player, xIsNext, moveHistory, currentMove, winner, setPlayer, handleNextMove, jumpTo } = useGame();
 
   return (
     <div className="game">
@@ -14,12 +15,20 @@ export const Game: React.FC = () => {
         />
       </div>
       <div className="game-info">
-        <History
-          xIsNext={xIsNext}
-          moveHistory={moveHistory}
-          winner={winner}
-          jumpTo={jumpTo}
-        />
+        {
+          player
+            ? 
+              <History
+                xIsNext={xIsNext}
+                moveHistory={moveHistory}
+                winner={winner}
+                jumpTo={jumpTo}
+              />
+            : 
+              <First
+                setPlayer={setPlayer}
+              />
+        }
       </div>
     </div>
   );
