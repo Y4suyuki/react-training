@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { SquareValue } from '../types/SquareValue';
+import { Player } from '../types/Player';
 import { calculateWinner } from '../lib/calculateWinner'
 
 type moveHistory = {
-  squares: SquareValue[]
+  squares: Player[]
 }[];
 
 export const useGame = () => {
   const [stepNumber  , setStepNumber]     = useState<number>(0);
   const [xIsNext     , setXIsNext]        = useState<boolean>(true);
   const [moveHistory , setMoveHistory]    = useState<moveHistory>([{squares: Array(9).fill(null) }]);
-  const currentMove = moveHistory[stepNumber];
-  const winner = calculateWinner(moveHistory[stepNumber].squares);
+  const currentMove                       = moveHistory[stepNumber];
+  const winner                            = calculateWinner(moveHistory[stepNumber].squares);
 
   const handleNextMove = (i: number): void => {
     const historySlice = moveHistory.slice(0, stepNumber + 1);

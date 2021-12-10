@@ -1,6 +1,6 @@
-import { SquareValue } from '../types/SquareValue'
+import { Player } from '../types/Player'
 
-export const calculateWinner = (squares: SquareValue[]): SquareValue => {
+export const calculateWinner = (squares: Player[]): Player => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

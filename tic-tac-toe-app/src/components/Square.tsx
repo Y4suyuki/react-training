@@ -1,8 +1,8 @@
 import React from 'react';
-import { SquareValue } from '../types/SquareValue'
+import { Player } from '../types/Player'
 
 export type SquareProps = {
-  value: SquareValue;
+  value: Player;
   onClick: VoidFunction;
 };
 

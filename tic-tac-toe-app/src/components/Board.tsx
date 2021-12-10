@@ -1,9 +1,9 @@
 import React from 'react';
-import { SquareValue } from '../types/SquareValue'
+import { Player } from '../types/Player'
 import { Square } from '../components/Square'
 
 type BoardProps = {
-  squares: SquareValue[];
+  squares: Player[];
   onClick: (i :number) => void;
 };
 
