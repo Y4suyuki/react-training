@@ -7,11 +7,11 @@ type moveHistory = {
 }[];
 
 export const useGame = () => {
-  const [stepNumber  , setStepNumber]     = useState<number>(0);
-  const [xIsNext     , setXIsNext]        = useState<boolean>(true);
-  const [moveHistory , setMoveHistory]    = useState<moveHistory>([{squares: Array(9).fill(null) }]);
-  const currentMove                       = moveHistory[stepNumber];
-  const winner                            = calculateWinner(moveHistory[stepNumber].squares);
+  const [stepNumber  , setStepNumber]  = useState<number>(0);
+  const [xIsNext     , setXIsNext]     = useState<boolean>(true);
+  const [moveHistory , setMoveHistory] = useState<moveHistory>([{squares: Array(9).fill(null) }]);
+  const currentMove                    = moveHistory[stepNumber];
+  const winner                         = calculateWinner(moveHistory[stepNumber].squares);
 
   const handleNextMove = (i: number): void => {
     const historySlice = moveHistory.slice(0, stepNumber + 1);
