@@ -1,20 +1,18 @@
 import React from 'react';
-import { SquareValue } from '../types/SquareValue'
+import { Player } from '../types/Player'
 
-type SquareProps = {
-  value: SquareValue
-  onClick: VoidFunction
+export type SquareProps = {
+  value: Player;
+  onClick: VoidFunction;
 };
 
-export class Square extends React.Component<SquareProps> {
-  render() {
-    return (
-      <button
-        className="square"
-        onClick={() => this.props.onClick()}
-      >
-        {this.props.value}
-      </button>
-    );
-  }
+export const Square: React.FC<SquareProps> = ({value, onClick}) => {
+  return (
+    <button
+      className="square"
+      onClick={() => onClick()}
+    >
+      {value}
+    </button>
+  );
 };
