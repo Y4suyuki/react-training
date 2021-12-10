@@ -8,15 +8,6 @@ type BoardProps = {
 };
 
 export const Board: React.FC<BoardProps> = ({squares, onClick}) => {
-  const renderSquare = (i: number) => {
-    return (
-      <Square
-        value={squares[i]}
-        onClick={() => onClick(i)}
-      />
-    );
-  }
-
   return (
     <div>
       {[...Array(3)].map((_, i) => {
