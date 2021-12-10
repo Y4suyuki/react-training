@@ -1,17 +1,13 @@
 import { Board } from '../components/Board'
 import { useGame } from '../hooks/useGame'
-import { calculateWinner } from '../lib/calculateWinner'
 
 export const Game: React.FC = () => {
-  const { history, stepNumber, xIsNext, handleNextMove, jumpTo } = useGame();
-
-  const current = history[stepNumber];
-  const winner = calculateWinner(current.squares);
+  const { xIsNext, moveHistory, currentMove, winner, handleNextMove, jumpTo } = useGame();
   const status =
     winner
       ? 'Winner: ' +  winner
       : 'Next player: ' + (xIsNext ? 'X' : 'O');
-  const moves = history.map((step, move) => {
+  const moves = moveHistory.map((step, move) => {
     const desc = move ?
       'Go to move #' + move :
       'Go to game start';
@@ -27,7 +23,7 @@ export const Game: React.FC = () => {
     <div className="game">
       <div className="game-board">
         <Board
-          squares={current.squares}
+          squares={currentMove.squares}
           onClick={(i) => handleNextMove(i)}
         />
       </div>

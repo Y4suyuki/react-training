@@ -2,26 +2,28 @@ import { useState } from 'react';
 import { SquareValue } from '../types/SquareValue';
 import { calculateWinner } from '../lib/calculateWinner'
 
-type History = {
+type moveHistory = {
   squares: SquareValue[]
 }[];
 
 export const useGame = () => {
-  const [history   , setHistory]    = useState<History>([{squares: Array(9).fill(null) }]);
-  const [stepNumber, setStepNumber] = useState<number>(0);
-  const [xIsNext   , setXIsNext]    = useState<boolean>(true);
+  const [stepNumber  , setStepNumber]     = useState<number>(0);
+  const [xIsNext     , setXIsNext]        = useState<boolean>(true);
+  const [moveHistory , setMoveHistory]    = useState<moveHistory>([{squares: Array(9).fill(null) }]);
+  const currentMove = moveHistory[stepNumber];
+  const winner = calculateWinner(moveHistory[stepNumber].squares);
 
   const handleNextMove = (i: number): void => {
-    const historySlice = history.slice(0, stepNumber + 1);
-    const current = history[history.length - 1];
+    const historySlice = moveHistory.slice(0, stepNumber + 1);
+    const current = moveHistory[moveHistory.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = xIsNext ? 'X' : 'O';
 
-    setHistory(historySlice.concat({squares: squares}));
-    setStepNumber(history.length);
+    setMoveHistory(historySlice.concat({squares: squares}));
+    setStepNumber(moveHistory.length);
     setXIsNext(!xIsNext);
   };
 
@@ -31,9 +33,10 @@ export const useGame = () => {
   };
 
   return {
-    history: history,
-    stepNumber: stepNumber,
     xIsNext: xIsNext,
+    moveHistory: moveHistory,
+    currentMove: currentMove,
+    winner: winner,
     handleNextMove: handleNextMove,
     jumpTo: jumpTo
   };
