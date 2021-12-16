@@ -1,5 +1,9 @@
 name: Test
-on: [push]
+on:
+  push:
+    branches:
+      - training0
+      - training1
 jobs:
   Explore-Github-Actions:
     runs-on: ubuntu-latest
