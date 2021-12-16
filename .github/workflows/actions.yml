@@ -39,3 +39,7 @@ jobs:
       - name: run e2e tests
         working-directory: ./tic-tac-toe-app
         run: npm run playwright
+      - uses: actions/upload-artifact@v2
+        with:
+          name: e2e-results
+          path: ./tic-tac-toe-app/test-results/
