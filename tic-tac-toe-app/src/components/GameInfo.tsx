@@ -29,7 +29,7 @@ export function GameInfo(props: Props) {
       <div>{status}</div>
       <ol>
         {props.history.map((_, i) => {
-          return <MoveInfo onClick={() => props.jumpTo(i)} move={i} />;
+          return <MoveInfo onClick={() => props.jumpTo(i)} move={i} key={i} />;
         })}
       </ol>
     </div>
