@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { History, Mark } from "./types";
 import { calculateWinner } from "./helper";
 import { infoStyle } from "./constants";
+import { dummyMove } from "./lib/ai/dummy";
+import { bestMove } from "./lib/ai/minimax";
 
 type GameState = {
   history: History;
@@ -49,11 +51,8 @@ export const useGame = () => {
     const history = gameS.history.slice(0, gameS.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const candidates = squares
-      .map((s, i) => ({ square: s, index: i }))
-      .filter((e) => e.square === null)
-      .map((e) => e.index);
-    const nextMove = candidates[0];
+
+    const nextMove = bestMove(squares, playerSide !== "X");
     makeMove(nextMove);
   }, [gameS, setGameS]);
 
