@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
-import { Mark } from "./types";
+import { History } from "./types";
 import { calculateWinner } from "./helper";
 
 type GameState = {
-  history: { squares: Mark[] }[];
+  history: History;
   stepNumber: number;
   xIsNext: boolean;
 };
