@@ -1,9 +1,9 @@
 // playwright.config.ts
-import { PlaywrightTestConfig, devices } from '@playwright/test';
+import { PlaywrightTestConfig, devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   webServer: {
-    command: 'npm start',
+    command: "npm start",
     port: 3000,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
@@ -11,12 +11,12 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   use: {
-    trace: 'retain-on-failure',
+    trace: "retain-on-failure",
   },
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
     },
     // {
     //   name: 'firefox',

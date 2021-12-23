@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function calculateWinner(squares: Mark[]) {
   const lines = [
@@ -20,40 +20,40 @@ function calculateWinner(squares: Mark[]) {
   return null;
 }
 
-
-type SquareProps = {value: Mark, onClick: () => void};
+type SquareProps = { value: Mark; onClick: () => void };
 type BoardProps = {
-  squares: Mark[],
-  onClick: (i: number) => void,
-}
+  squares: Mark[];
+  onClick: (i: number) => void;
+};
 
-type Mark = 'X' | 'O' | null
+type Mark = "X" | "O" | null;
 
-type GameProps = {}
+type GameProps = {};
 type GameState = {
-  history: { squares: Mark[] }[],
-  stepNumber: number,
-  xIsNext: boolean,
-}
+  history: { squares: Mark[] }[];
+  stepNumber: number;
+  xIsNext: boolean;
+};
 
 function Square(props: SquareProps) {
   return (
     <button className="square" onClick={props.onClick}>
-      { props.value }
+      {props.value}
     </button>
-  )
+  );
 }
 
-
-
 class Board extends React.Component<BoardProps, {}> {
-
   renderSquare(i: number) {
-    return <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
+    return (
+      <Square
+        value={this.props.squares[i]}
+        onClick={() => this.props.onClick(i)}
+      />
+    );
   }
 
   render() {
-
     return (
       <div>
         <div className="board-row">
@@ -76,47 +76,50 @@ class Board extends React.Component<BoardProps, {}> {
   }
 }
 
-
 export class Game extends React.Component<GameProps, GameState> {
   state = {
-    history: [{
-      squares: Array(9).fill(null),
-    }],
+    history: [
+      {
+        squares: Array(9).fill(null),
+      },
+    ],
     stepNumber: 0,
     xIsNext: true,
-  }
+  };
 
   constructor(props: GameProps) {
     super(props);
     this.state = {
-      history: [{
-        squares: Array(9).fill(null),
-      }],
+      history: [
+        {
+          squares: Array(9).fill(null),
+        },
+      ],
       stepNumber: 0,
-      xIsNext: true
-    }
+      xIsNext: true,
+    };
   }
 
-  handleClick(i: number)  {
+  handleClick(i: number) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
-    const squares = current.squares.slice()
+    const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = this.state.xIsNext ? "X" : "O";
     this.setState({
       history: history.concat({ squares: squares }),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
-    })
+      xIsNext: !this.state.xIsNext,
+    });
   }
 
   jumpTo(step: number) {
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0,
-    })
+      xIsNext: step % 2 === 0,
+    });
   }
 
   render() {
@@ -125,31 +128,32 @@ export class Game extends React.Component<GameProps, GameState> {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
-      const desc = move ?
-                   'Go to move #' + move :
-                   'Go to game start';
+      const desc = move ? "Go to move #" + move : "Go to game start";
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
-      )
+      );
     });
 
     let status;
     if (winner) {
-      status = 'Winner: ' + winner;
+      status = "Winner: " + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
 
     return (
       <div className="game">
         <div className="game-board">
-          <Board squares={current.squares} onClick={(i) => this.handleClick(i) } />
+          <Board
+            squares={current.squares}
+            onClick={(i) => this.handleClick(i)}
+          />
         </div>
         <div className="game-info">
-          <div>{ status }</div>
-          <ol>{ moves }</ol>
+          <div>{status}</div>
+          <ol>{moves}</ol>
         </div>
       </div>
     );

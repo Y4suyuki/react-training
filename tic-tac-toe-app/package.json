@@ -22,6 +22,7 @@
     "test": "react-scripts test",
     "playwright": "playwright test",
     "playwright:headed": "playwright test --headed",
+    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,6 +44,8 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "^1.17.0"
+    "@playwright/test": "^1.17.0",
+    "onchange": "^7.1.0",
+    "prettier": "2.5.1"
   }
 }
