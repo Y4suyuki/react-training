@@ -42,10 +42,30 @@ ul {
 }
 
 .game {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header header header"
+    "board board info info"
+    "footer footer footer footer";
+}
+.game-header {
+  text-align: center;
+  grid-area: header;
+}
+
+.game-board {
+  justify-self: end;
+  grid-area: board;
 }
 
 .game-info {
   margin-left: 20px;
+  grid-area: info;
+}
+
+.game-footer {
+  justify-self: center;
+  grid-area: footer;
 }

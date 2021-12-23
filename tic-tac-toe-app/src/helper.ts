@@ -19,3 +19,8 @@ export function calculateWinner(squares: Mark[]) {
   }
   return null;
 }
+
+export function choosePlayerSide() {
+  const res = Math.random() > 0.5;
+  return res ? "O" : "X";
+}
