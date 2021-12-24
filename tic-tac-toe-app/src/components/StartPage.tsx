@@ -21,15 +21,16 @@ export function StartPage(props: {
     );
   }
   return (
-    <div>
+    <div className="start-page">
       <h1>start game</h1>
       <h2>select your side</h2>
-      <div>
+      <div className="side-selector">
         <SideCheckBox choice="X" />
         <SideCheckBox choice="O" />
         <SideCheckBox choice="random" />
       </div>
       <button
+        className="start-button"
         onClick={() => {
           if (tempSide === "random") {
             props.setPlayerSide(choosePlayerSide());

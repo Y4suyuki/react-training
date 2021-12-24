@@ -68,4 +68,18 @@ ul {
 .game-footer {
   justify-self: center;
   grid-area: footer;
+  margin-top: 20px;
+}
+
+.start-page {
+  text-align: center;
+}
+
+.side-selector {
+  text-align: left;
+  margin-left: 43%;
+}
+
+.start-button {
+  margin-top: 20px;
 }
