@@ -28,9 +28,22 @@ class Square extends React.Component<SquareProps, SquareState> {
   }
 }
 
-class Board extends React.Component {
+
+interface BoardProps {};
+interface BoardState {
+  squares: Array<any>
+};
+class Board extends React.Component<BoardProps, BoardState> {
+
+  constructor(props: BoardProps) {
+    super(props)
+    this.state = {
+      squares: Array(9).fill(null)
+    }
+  }
+
   renderSquare(i: number) {
-    return <Square value={i}/>;
+    return <Square value={this.state.squares[i]}/>;
   }
 
   render() {
