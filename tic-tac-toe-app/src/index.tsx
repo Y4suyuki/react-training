@@ -7,7 +7,18 @@ import reportWebVitals from './reportWebVitals';
 interface SquareProps {
   value: any
 }
-class Square extends React.Component<SquareProps, {}> {
+
+interface SquareState {
+  value: any
+}
+class Square extends React.Component<SquareProps, SquareState> {
+
+  constructor(props: SquareProps) {
+    super(props);
+    this.state = {
+      value: props.value
+    }
+  }
   render() {
     return (
       <button className="square" onClick={ () => console.log("click") }>
