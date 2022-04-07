@@ -10,7 +10,7 @@ interface SquareProps {
 class Square extends React.Component<SquareProps, {}> {
   render() {
     return (
-      <button className="square">
+      <button className="square" onClick={ () => console.log("click") }>
         { this.props.value}
       </button>
     );
