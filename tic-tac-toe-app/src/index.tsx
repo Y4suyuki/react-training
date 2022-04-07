@@ -5,24 +5,14 @@ import reportWebVitals from './reportWebVitals';
 
 
 interface SquareProps {
-  value: any
+  value: any,
+  onClick:() => any
 }
-
-interface SquareState {
-  value: any
-}
-class Square extends React.Component<SquareProps, SquareState> {
-
-  constructor(props: SquareProps) {
-    super(props);
-    this.state = {
-      value: props.value
-    }
-  }
+class Square extends React.Component<SquareProps, {}> {
   render() {
     return (
-      <button className="square" onClick={ () => this.setState({ value: 'X' })}>
-        { this.state.value}
+      <button className="square" onClick={ this.props.onClick }>
+        { this.props.value}
       </button>
     );
   }
@@ -42,8 +32,17 @@ class Board extends React.Component<BoardProps, BoardState> {
     }
   }
 
+  handleClick(i: number) {
+    let next_squares = this.state.squares;
+    next_squares[i] = 'X';
+    this.setState({squares: next_squares})
+  }
+
   renderSquare(i: number) {
-    return <Square value={this.state.squares[i]}/>;
+    return <Square
+      value={ this.state.squares[i] }
+      onClick={ () => this.handleClick(i) }
+    />;
   }
 
   render() {
