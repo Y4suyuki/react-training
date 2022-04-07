@@ -48,8 +48,15 @@ class Board extends React.Component<BoardProps, BoardState> {
   }
 
   render() {
-    const turn = this.state.xIsNext ? 'X' : 'O';
-    const status =`Next player: ${turn}`;
+
+    let status = '';
+    if(calculateWinner(this.state.squares)) {
+      const winner = this.state.xIsNext ? 'O' : 'X';
+      status = `Winner is ${winner}`;
+    } else {
+      const turn = this.state.xIsNext ? 'X' : 'O';
+      status =`Next player: ${turn}`;
+    }
 
     return (
       <div>
