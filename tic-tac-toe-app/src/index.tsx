@@ -8,6 +8,7 @@ interface SquareProps {
   value: any,
   onClick:() => any
 }
+
 function Square(props: SquareProps) {
   return (
     <button className="square" onClick={ props.onClick }>
@@ -20,20 +21,23 @@ function Square(props: SquareProps) {
 interface BoardProps {};
 interface BoardState {
   squares: Array<any>
+  xIsNext: Boolean
 };
 class Board extends React.Component<BoardProps, BoardState> {
 
   constructor(props: BoardProps) {
     super(props)
     this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      xIsNext: true
     }
   }
 
   handleClick(i: number) {
     let next_squares = this.state.squares;
-    next_squares[i] = 'X';
-    this.setState({squares: next_squares})
+    let sign = this.state.xIsNext ? 'X' : 'O';
+    next_squares[i] = sign;
+    this.setState({squares: next_squares, xIsNext: !this.state.xIsNext})
   }
 
   renderSquare(i: number) {
