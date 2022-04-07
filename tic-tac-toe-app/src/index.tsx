@@ -8,14 +8,12 @@ interface SquareProps {
   value: any,
   onClick:() => any
 }
-class Square extends React.Component<SquareProps, {}> {
-  render() {
-    return (
-      <button className="square" onClick={ this.props.onClick }>
-        { this.props.value}
-      </button>
-    );
-  }
+function Square(props: SquareProps) {
+  return (
+    <button className="square" onClick={ props.onClick }>
+      { props.value}
+    </button>
+  );
 }
 
 
