@@ -48,7 +48,8 @@ class Board extends React.Component<BoardProps, BoardState> {
   }
 
   render() {
-    const status = 'Next player: X';
+    const turn = this.state.xIsNext ? 'X' : 'O';
+    const status =`Next player: ${turn}`;
 
     return (
       <div>
