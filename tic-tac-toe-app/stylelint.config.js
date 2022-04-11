@@ -1,0 +1,52 @@
+module.exports = {
+  // add your custom config here
+  // https://stylelint.io/user-guide/configuration
+  plugins: ['stylelint-scss'],
+  extends: ['stylelint-config-recess-order'],
+  rules: {
+    indentation: 2,
+    'block-no-empty': true,
+    'color-no-invalid-hex': true,
+    'color-hex-length': 'short',
+    'color-hex-case': 'lower',
+    'comment-no-empty': true,
+    'declaration-block-no-duplicate-properties': [
+      true,
+      {
+        ignore: ['consecutive-duplicates-with-different-values'],
+      },
+    ],
+    'declaration-block-no-shorthand-property-overrides': true,
+    'declaration-block-trailing-semicolon': 'always',
+    'declaration-colon-space-before': 'never',
+    'declaration-colon-space-after': 'always-single-line',
+    'font-family-no-duplicate-names': true,
+    'font-family-no-missing-generic-family-keyword': true,
+    'function-calc-no-unspaced-operator': true,
+    'function-linear-gradient-no-nonstandard-direction': true,
+    'keyframe-declaration-no-important': true,
+    'length-zero-no-unit': true,
+    'media-feature-name-no-unknown': true,
+    'no-duplicate-at-import-rules': true,
+    'no-duplicate-selectors': true,
+    'no-empty-source': true,
+    'no-extra-semicolons': true,
+    'no-invalid-double-slash-comments': true,
+    'number-leading-zero': 'never',
+    'property-no-unknown': true,
+    'selector-pseudo-class-no-unknown': true,
+    'selector-pseudo-element-no-unknown': [
+      true,
+      {
+        ignorePseudoElements: ['v-deep'],
+      },
+    ],
+    'selector-type-no-unknown': true,
+    'selector-combinator-space-before': 'always',
+    'selector-combinator-space-after': 'always',
+    'string-no-newline': true,
+    'unit-no-unknown': true,
+    'value-list-comma-space-after': 'always-single-line',
+    'value-list-comma-space-before': 'never',
+  },
+}
