@@ -62,36 +62,45 @@ class Board extends React.Component<BoardProps, BoardState> {
 interface GameProps {}
 interface GameState {
   history: Array<any>,
-  xIsNext: boolean
+  xIsNext: boolean,
+  stepNumber: number
 }
 
 
 class Game extends React.Component<GameProps, GameState> {
 
   handleClick(i: number) {
-    const history = this.state.history;
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     if(calculateWinner(current.squares) || current.squares[i] != null) {
       return;
     }
-    let next_squares = current.squares;
+    let next_squares = current.squares.slice();
     let sign = this.state.xIsNext ? 'X' : 'O';
     next_squares[i] = sign;
 
     let next_history = history.concat([{squares: next_squares}]);
-    this.setState({history: next_history, xIsNext: !this.state.xIsNext})
+    this.setState({history: next_history, xIsNext: !this.state.xIsNext, stepNumber: history.length})
+  }
+
+  jumpTo(step: number) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: step % 2 === 0
+    })
   }
 
   constructor(props: GameProps) {
     super(props);
     this.state = {
       history: [{squares: Array(9).fill(null)}],
-      xIsNext: true
+      xIsNext: true,
+      stepNumber: 0
     }
   }
   render() {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     let status = '';
     if(calculateWinner(current.squares)) {
       const winner = this.state.xIsNext ? 'O' : 'X';
@@ -101,6 +110,15 @@ class Game extends React.Component<GameProps, GameState> {
       status =`Next player: ${turn}`;
     }
 
+    const moves = history.map((step, move) => {
+      const desc = move ? "Go to move #" + move : "Go to game start";
+      return (
+        <li key={move}>
+          <button onClick={ () => this.jumpTo(move)}>{desc}</button>
+        </li>
+      )
+    });
+
     return (
       <div className="game">
         <div className="game-board">
@@ -108,7 +126,7 @@ class Game extends React.Component<GameProps, GameState> {
         </div>
         <div className="game-info">
           <div>{ status }</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{ moves }</ol>
         </div>
       </div>
     );
