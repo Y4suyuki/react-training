@@ -67,12 +67,7 @@ interface GameState {
 
 const Game: React.FunctionComponent<GameProps> = () => {
 
-  const [state, setState] = useState<GameState>({
-    history: [{squares: Array(9).fill(null)}],
-    xIsNext: true,
-    stepNumber: 0
-  })
-
+  const {state, setState} = useGameStatus();
   function handleClick(i: number) {
     const history = state.history.slice(0, state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -126,6 +121,15 @@ const Game: React.FunctionComponent<GameProps> = () => {
       </div>
     </div>
   );
+}
+
+const useGameStatus = () => {
+  const [state, setState] = useState<GameState>({
+    history: [{squares: Array(9).fill(null)}],
+    xIsNext: true,
+    stepNumber: 0
+  })
+  return {state, setState};
 }
 
 // ========================================
