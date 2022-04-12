@@ -8,32 +8,53 @@ describe('Game', () => {
   })
 
   describe('UI test', () => {
-    test('click button', () => {
+    test('Playing Game!', () => {
       // changed X in first,
       const components = render(<Game />)
-      let button  = components.getAllByRole("button")[0]
+      const buttons  = components.getAllByRole("button")
+
       act(() => {
-        button.dispatchEvent(new MouseEvent("click", { bubbles: true}))
+        buttons[0].dispatchEvent(new MouseEvent("click", { bubbles: true}))
       })
-      expect(button.innerHTML).toBe("X")
+      expect(buttons[0].innerHTML).toBe("X")
       expect(components.getByText(/Next player: O/i)).toBeTruthy()
 
       // changed O in second.
-      button  = components.getAllByRole("button")[1]
       act(() => {
-        button.dispatchEvent(new MouseEvent("click", { bubbles: true}))
+        buttons[1].dispatchEvent(new MouseEvent("click", { bubbles: true}))
       })
-      expect(button.innerHTML).toBe("O")
+      expect(buttons[1].innerHTML).toBe("O")
       expect(components.getByText(/Next player: X/i)).toBeTruthy()
 
       // not changed if click selected button
-      button  = components.getAllByRole("button")[1]
+      act(() => {
+        buttons[1].dispatchEvent(new MouseEvent("click", { bubbles: true}))
+      })
+      expect(buttons[1].innerHTML).toBe("O")
+      expect(components.getByText(/Next player: X/i)).toBeTruthy()
+
+      // get back if click `Go to move #1` and, get back one move.
+      let button  = components.getByRole('button', { name: /Go to move #1/i })
       act(() => {
         button.dispatchEvent(new MouseEvent("click", { bubbles: true}))
       })
-      expect(button.innerHTML).toBe("O")
-      expect(components.getByText(/Next player: X/i)).toBeTruthy()
+      expect(components.getByText(/Next player: O/i)).toBeTruthy()
 
+      // decide winner
+      let nums = [3, 4, 6, 8]
+      nums.forEach((i) => {
+        act(() => {
+          buttons[i].dispatchEvent(new MouseEvent("click", { bubbles: true}))
+        })
+      })
+      expect(components.getByText(/Winner is X/i)).toBeTruthy()
+
+      // not changed if after decide winner
+      act(() => {
+        buttons[7].dispatchEvent(new MouseEvent("click", { bubbles: true}))
+      })
+      expect(buttons[7].innerHTML).toBe("")
+      expect(components.getByText(/Winner is X/i)).toBeTruthy()
     })
   })
 })
