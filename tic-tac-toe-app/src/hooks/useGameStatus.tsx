@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useCallback } from 'react'
 
 interface GameState {
   history: Array<{ squares: Array<string | null> }>
@@ -8,7 +8,7 @@ interface GameState {
 
 export type useGameStatusReturnType = {
   state: GameState
-  setState: React.Dispatch<React.SetStateAction<GameState>>
+  updateState: (_: GameState) => void
 }
 
 export const useGameStatus = (): useGameStatusReturnType => {
@@ -17,5 +17,13 @@ export const useGameStatus = (): useGameStatusReturnType => {
     xIsNext: true,
     stepNumber: 0,
   })
-  return { state, setState }
+
+  const updateState = useCallback((state: GameState) => {
+    setState({
+      history: state.history,
+      xIsNext: state.xIsNext,
+      stepNumber: state.stepNumber
+    })
+  }, [])
+  return { state, updateState }
 }

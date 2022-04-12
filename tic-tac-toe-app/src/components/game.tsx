@@ -4,7 +4,7 @@ import { Board } from './board'
 import { calculateWinner } from '../functions/calculateWinner'
 
 export const Game: React.FunctionComponent = () => {
-  const { state, setState } = useGameStatus()
+  const { state, updateState } = useGameStatus()
   function handleClick(i: number) {
     const history = state.history.slice(0, state.stepNumber + 1)
     const current = history[history.length - 1]
@@ -16,7 +16,7 @@ export const Game: React.FunctionComponent = () => {
     next_squares[i] = sign
 
     const next_history = history.concat([{ squares: next_squares }])
-    setState({
+    updateState({
       history: next_history,
       xIsNext: !state.xIsNext,
       stepNumber: history.length,
@@ -24,7 +24,7 @@ export const Game: React.FunctionComponent = () => {
   }
 
   function jumpTo(step: number) {
-    setState({
+    updateState({
       history: state.history,
       stepNumber: step,
       xIsNext: step % 2 === 0,
