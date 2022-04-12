@@ -1,4 +1,4 @@
-import { Board } from '../../src/components/Board'
+import { Board } from '../../src/components/board'
 import { render } from '@testing-library/react'
 
 describe('Board', () => {
@@ -6,7 +6,6 @@ describe('Board', () => {
   const board = render(
     <Board squares={squares} onClick={() => console.log('HELLO')} />
   )
-
   test('snapshot', () => {
     expect(board).toMatchSnapshot()
   })
