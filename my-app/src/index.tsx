@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+
 function Square(props: any) {
     return (
         <button className="square" onClick={props.onClick}>
@@ -9,10 +10,13 @@ function Square(props: any) {
         </button>
     );
 }
+
+interface BoardProps {
+    squares: Array<Number>;
+    onClick: Function;
+}
   
-class Board extends React.Component<any, any> {
-
-
+class Board extends React.Component<BoardProps> {
     renderSquare(i: number) {
       return (
         <Square 
